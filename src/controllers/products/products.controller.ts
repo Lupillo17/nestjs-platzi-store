@@ -3,20 +3,18 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Post,
   Put,
   Query,
-  Res,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from 'src/dtos/products.dtos';
 import { ProductsService } from 'src/services/products/products.service';
 
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) {}
   @Get('')
   getPagination(
     @Query('limit') limit = 100,
@@ -37,15 +35,15 @@ export class ProductsController {
   }
 
   @Get(':id')
-  getOne(@Param('id') id: string) {
+  getOne(@Param('id', ParseIntPipe) id: number) {
     // response.status(200).send({
     //   message: `Product: ${id}`,
     // });
-    return this.productsService.findOne(+id);
+    return this.productsService.findOne(id);
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateProductDto) {
     // return {
     //   message: 'accion para crear',
     //   payload,
@@ -54,7 +52,7 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
+  update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
     // return {
     //   message: `Editando producto: ${id}`,
     //   payload,
