@@ -16,7 +16,7 @@ import { ProductsService } from 'src/services/products/products.service';
 
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService) { }
   @Get('')
   getPagination(
     @Query('limit') limit = 100,
@@ -63,9 +63,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return {
-      message: `Eliminando producto: ${id}`,
-    };
+  delete(@Param('id') id: string) {
+    return this.productsService.remove(+id);
   }
 }
