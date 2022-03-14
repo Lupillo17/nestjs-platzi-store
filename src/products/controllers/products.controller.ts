@@ -8,14 +8,17 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { CreateProductDto, UpdateProductDto } from '../dto/products.dtos';
 import { ProductsService } from '../services/products.service';
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
   @Get('')
+  @ApiOperation({ summary: 'List of products' })
   getPagination(
     @Query('limit') limit = 100,
     @Query('offset') offset = 5,
