@@ -9,8 +9,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
-import { CreateProductDto, UpdateProductDto } from 'src/dtos/products.dtos';
-import { ProductsService } from 'src/services/products/products.service';
+import { CreateProductDto, UpdateProductDto } from '../dto/products.dtos';
+import { ProductsService } from '../services/products.service';
 
 @Controller('products')
 export class ProductsController {
@@ -24,6 +24,7 @@ export class ProductsController {
     // return {
     //   message: `Product => Limit: ${limit}, Offset: ${offset}, Brand: ${brand}`,
     // };
+    console.log(limit, offset, brand);
     return this.productsService.findAll();
   }
 
