@@ -24,9 +24,6 @@ export class ProductsController {
     @Query('offset') offset = 5,
     @Query('brand') brand: string,
   ) {
-    // return {
-    //   message: `Product => Limit: ${limit}, Offset: ${offset}, Brand: ${brand}`,
-    // };
     console.log(limit, offset, brand);
     return this.productsService.findAll();
   }
@@ -39,33 +36,30 @@ export class ProductsController {
   }
 
   @Get(':id')
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    // response.status(200).send({
-    //   message: `Product: ${id}`,
-    // });
+  getOne(@Param('id') id: string) {
     return this.productsService.findOne(id);
   }
 
-  @Post()
-  create(@Body() payload: CreateProductDto) {
-    // return {
-    //   message: 'accion para crear',
-    //   payload,
-    // };
-    return this.productsService.create(payload);
-  }
+  // @Post()
+  // create(@Body() payload: CreateProductDto) {
+  //   // return {
+  //   //   message: 'accion para crear',
+  //   //   payload,
+  //   // };
+  //   return this.productsService.create(payload);
+  // }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
-    // return {
-    //   message: `Editando producto: ${id}`,
-    //   payload,
-    // };
-    return this.productsService.update(+id, payload);
-  }
+  // @Put(':id')
+  // update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
+  //   // return {
+  //   //   message: `Editando producto: ${id}`,
+  //   //   payload,
+  //   // };
+  //   return this.productsService.update(+id, payload);
+  // }
 
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.productsService.remove(+id);
-  }
+  // @Delete(':id')
+  // delete(@Param('id') id: string) {
+  //   return this.productsService.remove(+id);
+  // }
 }
