@@ -1,7 +1,6 @@
 import { HttpModule, HttpService, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { MongoClient } from 'mongodb';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
