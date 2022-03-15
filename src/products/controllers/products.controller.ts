@@ -10,7 +10,11 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MongoIdPipe } from 'src/common/mongo-id.pipe';
-import { CreateProductDto, UpdateProductDto } from '../dto/products.dtos';
+import {
+  CreateProductDto,
+  FilterProductsDto,
+  UpdateProductDto,
+} from '../dto/products.dtos';
 import { ProductsService } from '../services/products.service';
 
 @ApiTags('products')
@@ -19,13 +23,8 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
   @Get('')
   @ApiOperation({ summary: 'List of products' })
-  getPagination(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 5,
-    @Query('brand') brand: string,
-  ) {
-    console.log(limit, offset, brand);
-    return this.productsService.findAll();
+  getPagination(@Query() params: FilterProductsDto) {
+    return this.productsService.findAll(params);
   }
 
   @Get('filter')

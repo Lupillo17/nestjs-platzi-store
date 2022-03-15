@@ -14,6 +14,9 @@ async function bootstrap() {
       whitelist: true,
       // enviar alerta de datos no contemplados en BD
       forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
